@@ -23,35 +23,56 @@ gateway and only use the tools that are actually there.
 
 ### Roles → preferred tools
 
-| Role | Best fit | Why |
-|------|----------|-----|
-| Broad web search | Google Search, Brave, Bing | General, privacy-first, news |
-| Semantic/neural search | Exa | Finds by meaning, not keywords |
-| Full-text / deep content | Tavily, Linkup | Scored results, domain filters |
-| Fetch a known URL | Jina Reader, Firecrawl Scrape, Tavily Extract | Quick markdown, JS-heavy sites |
-| Async multi-source synthesis | Linkup Research, Tavily Research, Exa agent_run | Multi-source investigation |
-| Site crawling / structure map | Tavily Map, Firecrawl Map | |
-| News | Brave News, Bing News | |
-| Academic / PDF research | Jina (arXiv/SSRN/PDF extraction) | |
-| Structured data extraction | Firecrawl Extract | LLM-powered JSON schema extraction |
-| Privacy-focused | Brave, Kagi | Independent index |
-| Library / framework / API docs | Context7 | |
-| GitHub repo structure & architecture | DeepWiki | |
+| Role | Best fit | Also good | Why |
+|------|----------|-----------|-----|
+| Broad web search | Google Search, Brave, Bing | Tavily, Exa, Linkup | General, privacy-first, news |
+| Semantic/neural search | Exa | Tavily (basic), Linkup | Finds by meaning, not keywords |
+| Full-text / deep content | Tavily, Linkup | Exa (contents), Firecrawl | Scored results, domain filters |
+| Fetch a known URL | Jina Reader, Tavily Extract | Firecrawl Scrape, Exa (contents) | Quick markdown, JS-heavy sites |
+| Async multi-source synthesis | Linkup Research, Tavily Research | Exa agent_run, Firecrawl /agent, Parallel Task API | Multi-source investigation |
+| Site crawling / structure map | Firecrawl Map, Tavily Map | Exa (via contents) | |
+| News | Brave News, Bing News | Tavily (news topic) | |
+| Academic / PDF research | Jina (arXiv/SSRN/PDF) | Valyu (PubMed, arXiv, full-text) | |
+| Structured data extraction | Firecrawl Extract | Tavily Extract, Linkup Extract | LLM-powered JSON schema extraction |
+| Privacy-focused | Brave, Kagi | | Independent index |
+| Library / framework / API docs | Context7 | | |
+| GitHub repo structure & architecture | DeepWiki | | |
+| Answer-first / cited answers | Perplexity Sonar, You.com (Research) | Parallel Search | One-call cited, web-grounded answers |
+| Proprietary / specialized data | Valyu (SEC, PubMed, patents, clinical trials) | | Beyond public web — regulated industries |
+| Multi-engine SERP | SerpAPI, Serper | SearchAPI.io, DataForSEO | Structured results from Google, Bing, etc. |
+| Model-provider-native search | OpenAI Web Search, xAI/Grok | | Built into model API — no separate key |
+| Open-source / self-hosted | Crawl4AI, fastCRW, TinySearch | | Self-hosted, free, privacy-focused |
+| MCP-native budget search | Keiro, TinyFish | | Agent-optimized, low-cost |
+| Dataset building at scale | Parallel Find All, Valyu | | Training data, market mapping |
 
 ### Provider strengths
 
 - **Google Search** - broadest index, community/forum pushback
-- **Tavily** - AI-optimized, 4 search depths, domain filters, scored results with content, RAG workflows
-- **Exa** - neural/semantic search (meaning not keywords), clean markdown, advanced filters, multi-step research agent
-- **Linkup** - full-text depth, async multi-source research synthesis
+- **Tavily** - AI-optimized, 4 search depths, domain filters, scored results with content, RAG workflows. Full retrieval stack: Search + Extract + Crawl + Map + Research in one API
+- **Exa** - neural/semantic search (meaning not keywords), clean markdown, advanced filters, multi-step research agent. Returns full page content by default (as of March 2026)
+- **Linkup** - full-text depth, async multi-source research synthesis. Accuracy-critical production systems
 - **Brave Search** - independent index (30B+ pages), privacy-first, LLM Context API (pre-extracted content), Goggles ranking
 - **Bing Search** - web/news/image, market localization
-- **You.com** - 93% SimpleQA accuracy, cited research answers, finance index
-- **Firecrawl** - JS rendering, anti-bot bypass, clean markdown/JSON, LLM-powered structured extraction
-- **Jina AI** - URL-to-markdown, academic search (arXiv/SSRN), PDF extraction with figures/tables, embeddings/reranking
+- **You.com** - 93% SimpleQA accuracy, cited research answers, finance index. Free tier with unlimited searches
+- **Firecrawl** - JS rendering, anti-bot bypass, clean markdown/JSON, LLM-powered structured extraction. Also has /search and /agent endpoints
+- **Jina AI** - URL-to-markdown, academic search (arXiv/SSRN), PDF extraction with figures/tables, embeddings/reranking. Generous free tier (10M tokens)
 - **Kagi** - high-quality results, privacy-preserving, lenses (custom filters)
 - **Context7** - library/framework/API documentation, version-specific docs
 - **DeepWiki** - GitHub repo structure and architecture
+- **Perplexity Sonar** - Answer-first retrieval with citations. Returns cited, web-grounded answer in one call. $5/1k queries
+- **Parallel AI** - Proprietary web index built for AI agents. Search + Task API (deep research) + Find All (dataset building). Token-efficient excerpts. $3/1k queries
+- **Valyu** - Unified API for web + proprietary sources (SEC filings, PubMed, arXiv, clinical trials, USPTO patents, FRED economic data). 94% SimpleQA
+- **SerpAPI** - 40+ search engines, enterprise-grade structured SERP data. Note: Google sued SerpAPI Dec 2025 (DMCA)
+- **Serper** - Budget Google-only search API. $10/1k queries at 10K/mo
+- **SearchAPI.io** - Multi-engine SERP API. $1/1k queries at scale
+- **DataForSEO** - Budget SERP API, multi-engine. $6/1k at 10K/mo
+- **TinyFish** - Search + extraction + page operations (including behind-login). MCP-native
+- **Keiro** - MCP-native search API, budget-friendly. $3/1k requests
+- **OpenAI Web Search** - Built into Responses API — part of model cost
+- **xAI/Grok Web Search** - Built into Grok API — includes X/Twitter search, image understanding
+- **Crawl4AI** - Open-source web crawler for AI agents
+- **fastCRW** - Open-source search + scrape + answer API (AGPL-3.0)
+- **TinySearch** - Free/local search backend for privacy-focused agents
 - **Built in web search tools like `web_search` or `search_web`** - usually similar to **Bing Search**
 
 ---
