@@ -48,28 +48,28 @@ gateway and only use the tools that are actually there.
 ### Provider strengths
 
 - **Google Search** - broadest index, community/forum pushback
+- **Bing Search** - web/news/image, market localization
+- **OpenAI Web Search** - Built into Responses API — no separate key needed
+- **xAI/Grok Web Search** - Built into Grok API — includes X/Twitter search, image understanding
+- **Brave Search** - independent index (30B+ pages), privacy-first, LLM Context API (pre-extracted content), Goggles ranking
 - **Tavily** - AI-optimized, 4 search depths, domain filters, scored results with content, RAG workflows. Full retrieval stack: Search + Extract + Crawl + Map + Research in one API
 - **Exa** - neural/semantic search (meaning not keywords), clean markdown, advanced filters, multi-step research agent. Returns full page content by default
-- **Linkup** - full-text depth, async multi-source research synthesis. Accuracy-critical production systems
-- **Brave Search** - independent index (30B+ pages), privacy-first, LLM Context API (pre-extracted content), Goggles ranking
-- **Bing Search** - web/news/image, market localization
-- **You.com** - 93% SimpleQA accuracy, cited research answers, finance index
 - **Firecrawl** - JS rendering, anti-bot bypass, clean markdown/JSON, LLM-powered structured extraction. Also has /search and /agent endpoints
 - **Jina AI** - URL-to-markdown, academic search (arXiv/SSRN), PDF extraction with figures/tables, embeddings/reranking
-- **Kagi** - high-quality results, privacy-preserving, lenses (custom filters)
+- **Perplexity Sonar** - Answer-first retrieval with citations. Returns cited, web-grounded answer in one call
 - **Context7** - library/framework/API documentation, version-specific docs
 - **DeepWiki** - GitHub repo structure and architecture
-- **Perplexity Sonar** - Answer-first retrieval with citations. Returns cited, web-grounded answer in one call
+- **Linkup** - full-text depth, async multi-source research synthesis. Accuracy-critical production systems
+- **You.com** - 93% SimpleQA accuracy, cited research answers, finance index
 - **Parallel AI** - Proprietary web index built for AI agents. Search + Task API (deep research) + Find All (dataset building). Token-efficient excerpts
 - **Valyu** - Unified API for web + proprietary sources (SEC filings, PubMed, arXiv, clinical trials, USPTO patents, FRED economic data). 94% SimpleQA
 - **SerpAPI** - 40+ search engines, enterprise-grade structured SERP data
 - **Serper** - Google-only search API, clean structured results
 - **SearchAPI.io** - Multi-engine SERP API (Google, Bing, Baidu, etc.)
 - **DataForSEO** - Multi-engine SERP API, high-volume structured data
+- **Kagi** - high-quality results, privacy-preserving, lenses (custom filters)
 - **TinyFish** - Search + extraction + page operations (including behind-login). MCP-native
 - **Keiro** - MCP-native search API, agent-optimized
-- **OpenAI Web Search** - Built into Responses API — no separate key needed
-- **xAI/Grok Web Search** - Built into Grok API — includes X/Twitter search, image understanding
 - **Crawl4AI** - Open-source web crawler for AI agents
 - **fastCRW** - Open-source search + scrape + answer API
 - **TinySearch** - Local search backend for privacy-focused agents
