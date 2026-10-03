@@ -1,0 +1,186 @@
+---
+name: grounded-web-search
+description: >
+  Search the web, then verify the results aren't lying. Use this skill whenever performing
+  any web search task - how to structure queries, how many sources to consult, and how to
+  validate information through challenge searches. Triggers on any research task,
+  fact-checking request, technical query, competitor analysis, news lookup, or any question
+  where external web information is needed. Always consult this skill before picking a
+  search tool.
+---
+
+# Grounded Web Search
+
+Guidance for structuring queries and validating information through challenge searches.
+
+---
+
+## Tool Reference
+
+**Note:** Not all tools might be available. This reference documents **known official
+first-party MCP search servers**. Before searching, check what exists on the current MCP
+gateway and only use the tools that are actually there.
+
+### Roles → preferred tools
+
+| Role | Best fit | Why |
+|------|----------|-----|
+| Broad web search | Google Search, Brave, Bing | General, privacy-first, news |
+| Semantic/neural search | Exa | Finds by meaning, not keywords |
+| Full-text / deep content | Tavily, Linkup | Scored results, domain filters |
+| Fetch a known URL | Jina Reader, Firecrawl Scrape, Tavily Extract | Quick markdown, JS-heavy sites |
+| Async multi-source synthesis | Linkup Research, Tavily Research, Exa agent_run | Multi-source investigation |
+| Site crawling / structure map | Tavily Map, Firecrawl Map | |
+| News | Brave News, Bing News | |
+| Academic / PDF research | Jina (arXiv/SSRN/PDF extraction) | |
+| Structured data extraction | Firecrawl Extract | LLM-powered JSON schema extraction |
+| Privacy-focused | Brave, Kagi | Independent index |
+| Library / framework / API docs | Context7 | |
+| GitHub repo structure & architecture | DeepWiki | |
+
+### Provider strengths
+
+- **Google Search** - broadest index, community/forum pushback
+- **Tavily** - AI-optimized, 4 search depths, domain filters, scored results with content, RAG workflows
+- **Exa** - neural/semantic search (meaning not keywords), clean markdown, advanced filters, multi-step research agent
+- **Linkup** - full-text depth, async multi-source research synthesis
+- **Brave Search** - independent index (30B+ pages), privacy-first, LLM Context API (pre-extracted content), Goggles ranking
+- **Bing Search** - web/news/image, market localization
+- **You.com** - 93% SimpleQA accuracy, cited research answers, finance index
+- **Firecrawl** - JS rendering, anti-bot bypass, clean markdown/JSON, LLM-powered structured extraction
+- **Jina AI** - URL-to-markdown, academic search (arXiv/SSRN), PDF extraction with figures/tables, embeddings/reranking
+- **Kagi** - high-quality results, privacy-preserving, lenses (custom filters)
+- **Context7** - library/framework/API documentation, version-specific docs
+- **DeepWiki** - GitHub repo structure and architecture
+- **Built in web search tools like `web_search` or `search_web`** - usually similar to **Bing Search**
+
+---
+
+## Layered Search Strategy
+
+Start simple, escalate to depth and validation as needed:
+
+```
+1. Basic search       → Quick fact, breaking news, official info
+2. Deep search        → Need more content, full-text depth
+3. Research           → Need synthesis across many sources (async - poll get-research)
+```
+
+---
+
+## Patterns, Tips and Procedures
+
+### Query Construction Tips
+
+- Keep queries **3–6 words** for a simple search they perform best on concise, keyword-style queries
+- Use **full natural language questions** for research
+- When reformulating a failed query, **change the terms meaningfully** - don't just rephrase the same words
+- For docs questions, include the **version number** (e.g., "React 19" not "React") - context7 and search both benefit
+
+### Source Quality Signals
+
+**Prefer:**
+- Official documentation and release notes
+- Author-attributed technical articles on known publications
+- Wikipedia (for factual/historical queries)
+- GitHub issues/discussions (for technical problems)
+- context7 / deepwiki / github content over blog posts when they cover the same API surface
+
+**Treat with caution:**
+- SEO-heavy "best of" listicles
+- Undated articles on fast-moving topics
+- Single-source claims on controversial topics
+- Results that all share the same framing (signal: run a challenge search)
+
+### Challenge Search (Validation Pattern)
+
+**What it is:** After finding information that will inform a decision or recommendation, actively search for sources that contradict, challenge, or complicate the original finding. The goal is to avoid confirmation bias and surface dissenting perspectives before presenting a conclusion.
+
+**When to use it:**
+- Any claim that will be used to support a recommendation
+- Competitive or market intelligence
+- Technical decisions (library choice, architecture, tools)
+- News or events with potential bias (controversial topics, company announcements)
+- Any time results from one source feel too clean or one-sided
+
+**How to run it:**
+
+```
+Original search:  "benefits of [X]"
+Challenge search: "drawbacks of [X]" OR "problems with [X]" OR "[X] vs [alternative]"
+
+Original search:  "[Product] positive reviews"
+Challenge search: "[Product] complaints" OR "[Product] criticism" OR "why [Product] failed"
+
+Original search:  "[Claim] evidence"
+Challenge search: "[Claim] debunked" OR "criticism of [claim]" OR "counterargument [claim]"
+```
+
+**Recommended tool for challenge searches:** `google_search_search` (community/forum pushback), then `linkup_linkup-search` if full-text counterarguments are needed.
+
+**How to weigh results:**
+- If challenge search returns strong, credible counterpoints → surface them explicitly alongside the original finding
+- If challenge search returns weak or fringe results → original finding is more reliable; note the absence of credible counterarguments
+- If challenge search returns conflicting expert opinion → present both sides without forcing a conclusion
+
+**Output format when challenge search finds meaningful contradictions:**
+
+> ✅ **Original finding:** [summary]
+> ⚠️ **Counterpoint found:** [summary of challenge result, with source]
+> ⚖️ **Weight:** [your assessment of which is more credible and why]
+
+### Parallel Execution
+
+When a query has multiple distinct sub-questions, run searches in parallel rather than sequentially. Example:
+
+```
+User: "Compare Remix and Next.js for a project"
+
+Run in parallel:
+→ search: "Remix framework strengths"
+→ search: "Next.js strengths"
+→ search: "Remix vs Next.js Reddit" ← community sentiment
+
+Then challenge:
+→ search: "Remix drawbacks problems"
+→ search: "Next.js drawbacks problems"
+```
+
+---
+
+## Search Methodology
+
+### Basic Search
+For news, simple topics and official information
+- Discover and execute three or five search queries using the Preferred Tools
+
+### Deep Search
+For complex topics, technical details and fact-checking
+- Parallel execution for the main topics
+- After each iterarion evaluate the answer. Ask yourself: "those the information uncovered provide insight into the user answer?"
+- If the answer from the above question is "No", iterate
+- Iterate no more than three times, then proceed with the answer
+
+### Research
+For literature reviews, deep investigations, or multi-source synthesis:
+1. **Scope** - clarify domain, depth (5/15/30 sources), focus, and audience before searching
+2. **Three-cycle search** - academic databases → authors & journals → citation trails (follow references and citations of key papers)
+3. **Evaluate sources** - rate relevance, authority, recency, and type; prefer primary sources and peer-reviewed work
+4. **Triangulate** - cross-reference for consensus, debates, gaps, and key figures; never present a single source as "the answer"
+5. **Fact-check** - verify every citation exists (title, author, year, URL/DOI); delete unverifiable ones; AI systems fabricate citations 15-55% of the time
+6. **Use existing patterns** - run challenge searches to validate key claims, parallel execution for sub-questions
+
+## Output
+
+### Simple search
+- Most accurate and significant finds first
+- Return all the links to the significant sources in the footnotes
+
+### Complex search/research
+- Most accurate and significant finds first, linked to the primary sources
+- Summarize and reason the significant finds before proceeding with the less significant information
+- key findings with sources, consensus, debates & open questions, full source list
+- You can use tables for structured and tabular information and ASCII diagrams as needed
+- Proceed with the rest of the less significant information if any. Be brief
+- Return all the links to the significant sources in the footnotes
+
