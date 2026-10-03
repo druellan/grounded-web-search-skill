@@ -49,30 +49,30 @@ gateway and only use the tools that are actually there.
 
 - **Google Search** - broadest index, community/forum pushback
 - **Tavily** - AI-optimized, 4 search depths, domain filters, scored results with content, RAG workflows. Full retrieval stack: Search + Extract + Crawl + Map + Research in one API
-- **Exa** - neural/semantic search (meaning not keywords), clean markdown, advanced filters, multi-step research agent. Returns full page content by default (as of March 2026)
+- **Exa** - neural/semantic search (meaning not keywords), clean markdown, advanced filters, multi-step research agent. Returns full page content by default
 - **Linkup** - full-text depth, async multi-source research synthesis. Accuracy-critical production systems
 - **Brave Search** - independent index (30B+ pages), privacy-first, LLM Context API (pre-extracted content), Goggles ranking
 - **Bing Search** - web/news/image, market localization
-- **You.com** - 93% SimpleQA accuracy, cited research answers, finance index. Free tier with unlimited searches
+- **You.com** - 93% SimpleQA accuracy, cited research answers, finance index
 - **Firecrawl** - JS rendering, anti-bot bypass, clean markdown/JSON, LLM-powered structured extraction. Also has /search and /agent endpoints
-- **Jina AI** - URL-to-markdown, academic search (arXiv/SSRN), PDF extraction with figures/tables, embeddings/reranking. Generous free tier (10M tokens)
+- **Jina AI** - URL-to-markdown, academic search (arXiv/SSRN), PDF extraction with figures/tables, embeddings/reranking
 - **Kagi** - high-quality results, privacy-preserving, lenses (custom filters)
 - **Context7** - library/framework/API documentation, version-specific docs
 - **DeepWiki** - GitHub repo structure and architecture
-- **Perplexity Sonar** - Answer-first retrieval with citations. Returns cited, web-grounded answer in one call. $5/1k queries
-- **Parallel AI** - Proprietary web index built for AI agents. Search + Task API (deep research) + Find All (dataset building). Token-efficient excerpts. $3/1k queries
+- **Perplexity Sonar** - Answer-first retrieval with citations. Returns cited, web-grounded answer in one call
+- **Parallel AI** - Proprietary web index built for AI agents. Search + Task API (deep research) + Find All (dataset building). Token-efficient excerpts
 - **Valyu** - Unified API for web + proprietary sources (SEC filings, PubMed, arXiv, clinical trials, USPTO patents, FRED economic data). 94% SimpleQA
-- **SerpAPI** - 40+ search engines, enterprise-grade structured SERP data. Note: Google sued SerpAPI Dec 2025 (DMCA)
-- **Serper** - Budget Google-only search API. $10/1k queries at 10K/mo
-- **SearchAPI.io** - Multi-engine SERP API. $1/1k queries at scale
-- **DataForSEO** - Budget SERP API, multi-engine. $6/1k at 10K/mo
+- **SerpAPI** - 40+ search engines, enterprise-grade structured SERP data
+- **Serper** - Google-only search API, clean structured results
+- **SearchAPI.io** - Multi-engine SERP API (Google, Bing, Baidu, etc.)
+- **DataForSEO** - Multi-engine SERP API, high-volume structured data
 - **TinyFish** - Search + extraction + page operations (including behind-login). MCP-native
-- **Keiro** - MCP-native search API, budget-friendly. $3/1k requests
-- **OpenAI Web Search** - Built into Responses API — part of model cost
+- **Keiro** - MCP-native search API, agent-optimized
+- **OpenAI Web Search** - Built into Responses API — no separate key needed
 - **xAI/Grok Web Search** - Built into Grok API — includes X/Twitter search, image understanding
 - **Crawl4AI** - Open-source web crawler for AI agents
-- **fastCRW** - Open-source search + scrape + answer API (AGPL-3.0)
-- **TinySearch** - Free/local search backend for privacy-focused agents
+- **fastCRW** - Open-source search + scrape + answer API
+- **TinySearch** - Local search backend for privacy-focused agents
 - **Built in web search tools like `web_search` or `search_web`** - usually similar to **Bing Search**
 
 ---
