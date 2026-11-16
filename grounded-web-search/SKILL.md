@@ -205,3 +205,23 @@ For literature reviews, deep investigations, or multi-source synthesis:
 - Proceed with the rest of the less significant information if any. Be brief
 - Return all the links to the significant sources in the footnotes
 
+## Sources
+
+### Ordering principle
+
+List sources from **most reliable and important** to **least reliable and important**. The reader should see the strongest evidence first.
+
+### What determines reliability
+
+1. **Authority** — primary sources (official docs, peer-reviewed papers, original research) > secondary sources (analysis, commentary) > tertiary (summaries, listicles)
+2. **Recency** — newer is better for fast-moving topics (tech, news); less critical for stable facts (history, math)
+3. **Relevance** — directly addresses the question vs. tangentially related
+4. **Consensus** — multiple independent sources agreeing > single-source claims
+
+### Format
+
+- Use footnotes for inline citations
+- End with a full source list, ordered by the principle above
+- Each entry: title, author (if available), publication, date, URL
+- If sources conflict, note the disagreement explicitly rather than picking one silently
+
